@@ -9,44 +9,47 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var redColor: UIView!
-    @IBOutlet weak var yellowColor: UIView!
-    @IBOutlet weak var greenColor: UIView!
+    @IBOutlet weak var redColorView: UIView!
+    @IBOutlet weak var yellowColorView: UIView!
+    @IBOutlet weak var greenColorView: UIView!
     @IBOutlet weak var changeTheLightButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        redColor.layer.cornerRadius = 60
-        redColor.backgroundColor = .red
-        redColor.alpha = 0.3
-        
-        yellowColor.layer.cornerRadius = 60
-        yellowColor.backgroundColor = .yellow
-        yellowColor.alpha = 0.3
-        
-        greenColor.layer.cornerRadius = 60
-        greenColor.backgroundColor = .green
-        greenColor.alpha = 0.3
-        
-        changeTheLightButton.layer.cornerRadius = 10
+        setupConfigurationOfViews()
     }
 
-    @IBAction func changingTheLight() {
+    @IBAction func changingTheLightPressed() {
         
-        if redColor.alpha != 1 && yellowColor.alpha != 1 && greenColor.alpha != 1 {
+        if redColorView.alpha != 1 && yellowColorView.alpha != 1 && greenColorView.alpha != 1 {
             changeTheLightButton.setTitle("NEXT", for: .normal)
-            redColor.alpha = 1
-        } else if redColor.alpha == 1 && yellowColor.alpha != 1 && greenColor.alpha != 1 {
-            yellowColor.alpha = 1
-            redColor.alpha = 0.3
-        } else if redColor.alpha != 1 && yellowColor.alpha == 1 && greenColor.alpha != 1 {
-            greenColor.alpha = 1
-            yellowColor.alpha = 0.3
-        } else if redColor.alpha != 1 && yellowColor.alpha != 1 && greenColor.alpha == 1 {
-            redColor.alpha = 1
-            greenColor.alpha = 0.3
+            redColorView.alpha = 1
+        } else if redColorView.alpha == 1 && yellowColorView.alpha != 1 && greenColorView.alpha != 1 {
+            yellowColorView.alpha = 1
+            redColorView.alpha = 0.3
+        } else if redColorView.alpha != 1 && yellowColorView.alpha == 1 && greenColorView.alpha != 1 {
+            greenColorView.alpha = 1
+            yellowColorView.alpha = 0.3
+        } else if redColorView.alpha != 1 && yellowColorView.alpha != 1 && greenColorView.alpha == 1 {
+            redColorView.alpha = 1
+            greenColorView.alpha = 0.3
         }
+    }
+    
+    private func setupConfigurationOfViews() {
+        redColorView.layer.cornerRadius = 60
+        redColorView.backgroundColor = .red
+        redColorView.alpha = 0.3
+        
+        yellowColorView.layer.cornerRadius = 60
+        yellowColorView.backgroundColor = .yellow
+        yellowColorView.alpha = 0.3
+        
+        greenColorView.layer.cornerRadius = 60
+        greenColorView.backgroundColor = .green
+        greenColorView.alpha = 0.3
+        
+        changeTheLightButton.layer.cornerRadius = 10
     }
 }
 
