@@ -49,16 +49,16 @@ class ViewController: UIViewController {
 
         switch currentLight {
         case .red:
-            redColorView.alpha = lightsIsOff
-            yellowColorView.alpha = lightsIsOn
-            currentLight = .yellow
-        case .yellow:
-            yellowColorView.alpha = lightsIsOff
-            greenColorView.alpha = lightsIsOn
-            currentLight = .green
-        case .green:
             greenColorView.alpha = lightsIsOff
             redColorView.alpha = lightsIsOn
+            currentLight = .yellow
+        case .yellow:
+            redColorView.alpha = lightsIsOff
+            yellowColorView.alpha = lightsIsOn
+            currentLight = .green
+        case .green:
+            yellowColorView.alpha = lightsIsOff
+            greenColorView.alpha = lightsIsOn
             currentLight = .red
         }
     }
