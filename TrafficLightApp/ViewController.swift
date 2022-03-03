@@ -7,49 +7,65 @@
 
 import UIKit
 
+enum CurrentLight {
+    case red, yellow, green
+}
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var redColorView: UIView!
     @IBOutlet weak var yellowColorView: UIView!
     @IBOutlet weak var greenColorView: UIView!
+    
     @IBOutlet weak var changeTheLightButton: UIButton!
+    
+    private let lightsIsOn: CGFloat = 1
+    private let lightsIsOff: CGFloat = 0.3
+    private var currentLight: CurrentLight = .red
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        redColorView.alpha = lightsIsOff
+        yellowColorView.alpha = lightsIsOff
+        greenColorView.alpha = lightsIsOff
+        
+        redColorView.backgroundColor = .red
+        yellowColorView.backgroundColor = .yellow
+        greenColorView.backgroundColor = .green
+        
+        changeTheLightButton.layer.cornerRadius = 10
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         setupConfigurationOfViews()
     }
 
     @IBAction func changingTheLightPressed() {
-        
-        if redColorView.alpha != 1 && yellowColorView.alpha != 1 && greenColorView.alpha != 1 {
+        if changeTheLightButton.currentTitle == "START" {
             changeTheLightButton.setTitle("NEXT", for: .normal)
-            redColorView.alpha = 1
-        } else if redColorView.alpha == 1 && yellowColorView.alpha != 1 && greenColorView.alpha != 1 {
-            yellowColorView.alpha = 1
-            redColorView.alpha = 0.3
-        } else if redColorView.alpha != 1 && yellowColorView.alpha == 1 && greenColorView.alpha != 1 {
-            greenColorView.alpha = 1
-            yellowColorView.alpha = 0.3
-        } else if redColorView.alpha != 1 && yellowColorView.alpha != 1 && greenColorView.alpha == 1 {
-            redColorView.alpha = 1
-            greenColorView.alpha = 0.3
+        }
+
+        switch currentLight {
+        case .red:
+            redColorView.alpha = lightsIsOff
+            yellowColorView.alpha = lightsIsOn
+            currentLight = .yellow
+        case .yellow:
+            yellowColorView.alpha = lightsIsOff
+            greenColorView.alpha = lightsIsOn
+            currentLight = .green
+        case .green:
+            greenColorView.alpha = lightsIsOff
+            redColorView.alpha = lightsIsOn
+            currentLight = .red
         }
     }
     
     private func setupConfigurationOfViews() {
-        redColorView.layer.cornerRadius = 60
-        redColorView.backgroundColor = .red
-        redColorView.alpha = 0.3
-        
-        yellowColorView.layer.cornerRadius = 60
-        yellowColorView.backgroundColor = .yellow
-        yellowColorView.alpha = 0.3
-        
-        greenColorView.layer.cornerRadius = 60
-        greenColorView.backgroundColor = .green
-        greenColorView.alpha = 0.3
-        
-        changeTheLightButton.layer.cornerRadius = 10
+        redColorView.layer.cornerRadius = redColorView.frame.width / 2
+        yellowColorView.layer.cornerRadius = yellowColorView.frame.width / 2
+        greenColorView.layer.cornerRadius = greenColorView.frame.width / 2
     }
 }
-
